@@ -20,6 +20,9 @@ while continua:
 
         # Mostra todo o baralho
         estado_baralho(baralho)
+
+        # Pula uma linha
+        print('\n')
         indice_carta = int(input(f"Escolha uma carta (digite um número entre 1 e {len(baralho)}):  "))
         aux_i = indice_carta - 1
         escolhendo_carta = True
@@ -58,11 +61,13 @@ while continua:
                         destino = origem - 1
                         baralho = empilha(baralho, origem, destino)
                         escolhendo_onde_empilhar = False
+                        escolhendo_carta = False
                     elif choice == 2:
                         origem = aux_i
                         destino = origem - 3
                         baralho = empilha(baralho, origem, destino)
                         escolhendo_onde_empilhar = False
+                        escolhendo_carta = False
                     else:
                         print(f"Opção inválida. Sobre qual carta você quer empilhar o {baralho[aux_i]}? \n 1. {baralho[aux_i - 1]} \n 2. {baralho[aux_i - 3]} \n")
                         choice = int(input("Digite o número de sua escolha (1 ou 2): "))
