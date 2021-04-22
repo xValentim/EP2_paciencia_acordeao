@@ -6,8 +6,14 @@ def cria_baralho():
         baralho.append(valores[i] + '♥')
         baralho.append(valores[i] + '♦')
         baralho.append(valores[i] + '♣')
-    print(baralho)
+    #print(baralho)
     return baralho
+
+def estado_baralho(baralho):
+    print('O estado atual do baralho é:\n')
+    for i in range(len(baralho)):
+        print(str(i + 1) + '.  ' + baralho[i])
+
 
 def extrai_naipe(carta):
     return carta[-1]
