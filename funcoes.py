@@ -39,3 +39,8 @@ def lista_movimentos_possiveis(baralho, posicao):
         if naipe == naipe_1 or valor == valor_1:
             movimentos.append(1)
     return movimentos
+
+def empilha(baralho, origem, destino):
+    baralho[destino] = baralho[origem]
+    del baralho[origem]
+    return baralho
