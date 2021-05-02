@@ -1,5 +1,16 @@
 import random
 
+
+RED   = "\033[1;31m"  
+BLUE  = "\033[1;34m"
+CYAN  = "\033[1;36m"
+GREEN = "\033[0;32m"
+RESET = "\033[0;0m"
+BOLD    = "\033[;1m"
+REVERSE = "\033[;7m"
+
+
+
 def cria_baralho():
     valores = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
     baralho = []
@@ -8,20 +19,35 @@ def cria_baralho():
         baralho.append(valores[i] + '♥')
         baralho.append(valores[i] + '♦')
         baralho.append(valores[i] + '♣')
-    #print(baralho)
     random.shuffle(baralho)
     return baralho
-
-def estado_baralho(baralho):
-    print('O estado atual do baralho é:\n')
-    for i in range(len(baralho)):
-        print(str(i + 1) + '.  ' + baralho[i])
 
 def extrai_naipe(carta):
     return carta[-1]
 
 def extrai_valor(carta):
     return carta[0:len(carta) - 1]
+
+def colorir(carta):
+    if extrai_naipe(carta) == '♠':
+        carta = BLUE + carta + RESET
+    elif extrai_naipe(carta) == '♥':
+        carta = RED + carta + RESET
+    elif extrai_naipe(carta) == '♦':
+        carta = CYAN + carta + RESET
+    elif extrai_naipe(carta) == '♣':
+        carta = GREEN + carta + RESET
+    return carta
+'''
+teste = cria_baralho()
+carta1 = colorir(teste[1]) 
+print(carta1)'''
+
+def estado_baralho(baralho):
+    print('O estado atual do baralho é:\n')
+    for i in range(len(baralho)):
+        print(str(i + 1) + '.  ' + colorir(baralho[i]))
+
 
 def lista_movimentos_possiveis(baralho, posicao):
     movimentos = []
