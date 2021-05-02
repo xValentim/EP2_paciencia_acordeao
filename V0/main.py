@@ -23,17 +23,22 @@ while continua:
 
         # Pula uma linha
         print('\n')
-        indice_carta = int(input(f"Escolha uma carta (digite um número entre 1 e {len(baralho)}):  "))
+        try:
+            indice_carta = int(input(f"Escolha uma carta (digite um número entre 1 e {len(baralho)}):  "))
+        except:
+            indice_carta = 0
         aux_i = indice_carta - 1
         escolhendo_carta = True
         while escolhendo_carta:
 
-            # Trocar por try e except
             # Verifica se a carta é válida
-            if indice_carta > len(baralho):
+            if indice_carta > len(baralho) or indice_carta <= 0 or type(indice_carta) == str:
                 carta_valida = False
                 while carta_valida != True:
-                    indice_carta = int(input(f"Posição inválida. Por favor, digite um número entre 1 e {len(baralho)}):"))
+                    try:
+                        indice_carta = int(input(f"Posição inválida. Por favor, digite um número entre 1 e {len(baralho)}):"))
+                    except:
+                        indice_carta = 0
                     if indice_carta > 0 and indice_carta <= len(baralho):
                         carta_valida = True
                         aux_i = indice_carta - 1
@@ -41,7 +46,10 @@ while continua:
             # Verifica movimentos possiveis
             movimentos = lista_movimentos_possiveis(baralho, aux_i)    
             if len(movimentos) == 0:
-                indice_carta = int(input(f'A carta {baralho[aux_i]} não pode ser movida. Por favor, digite um número entre 1 e {len(baralho)}):  '))
+                try:
+                    indice_carta = int(input(f'A carta {colorir(baralho[aux_i])} não pode ser movida. Por favor, digite um número entre 1 e {len(baralho)}):  '))
+                except:
+                    indice_carta = 0
                 aux_i = indice_carta - 1
             elif len(movimentos) == 1:
                 origem = aux_i
@@ -50,9 +58,11 @@ while continua:
                 escolhendo_carta = False
             else:
                 #Dois movimentos possiveis
-                print(f"Sobre qual carta você quer empilhar o {baralho[aux_i]}? \n 1. {baralho[aux_i - 1]} \n 2. {baralho[aux_i - 3]} \n")
-                choice = int(input("Digite o número de sua escolha (1 ou 2): "))
-
+                try:
+                    print(f"Sobre qual carta você quer empilhar o {colorir(baralho[aux_i])}? \n 1. {colorir(baralho[aux_i - 1])} \n 2. {colorir(baralho[aux_i - 3])} \n")
+                    choice = int(input("Digite o número de sua escolha (1 ou 2): "))
+                except:
+                    choice = 0
                 # Pergunta ao usuário onde ele quer empilhar
                 escolhendo_onde_empilhar = True
                 while escolhendo_onde_empilhar:
@@ -69,8 +79,11 @@ while continua:
                         escolhendo_onde_empilhar = False
                         escolhendo_carta = False
                     else:
-                        print(f"Opção inválida. Sobre qual carta você quer empilhar o {baralho[aux_i]}? \n 1. {baralho[aux_i - 1]} \n 2. {baralho[aux_i - 3]} \n")
-                        choice = int(input("Digite o número de sua escolha (1 ou 2): "))
+                        try:
+                            print(f"Opção inválida. Sobre qual carta você quer empilhar o {colorir(baralho[aux_i])}? \n 1. {colorir(baralho[aux_i - 1])} \n 2. {colorir(baralho[aux_i - 3])} \n")
+                            choice = int(input("Digite o número de sua escolha (1 ou 2): "))
+                        except:
+                            choice = 0
 
     if len(baralho) > 1:
         print('Você perdeu :( ')
