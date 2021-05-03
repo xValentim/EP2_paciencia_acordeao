@@ -1,6 +1,6 @@
 import random
 
-
+# Tabela de cores - Usadas pela função "colorir"
 RED   = "\033[1;31m"  
 BLUE  = "\033[1;34m"
 CYAN  = "\033[1;36m"
@@ -9,8 +9,7 @@ RESET = "\033[0;0m"
 BOLD    = "\033[;1m"
 REVERSE = "\033[;7m"
 
-
-
+# Funçao que cria baralho e embaralha as cartasS (shuffle)
 def cria_baralho():
     valores = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
     baralho = []
@@ -22,12 +21,15 @@ def cria_baralho():
     random.shuffle(baralho)
     return baralho
 
+# Extrai o naipe da carta (ultima posição da string)
 def extrai_naipe(carta):
     return carta[-1]
 
+# Extrai valor da carta (todas as posições, exceto a ultima)
 def extrai_valor(carta):
     return carta[0:len(carta) - 1]
 
+# Função usada para colorir as cartas
 def colorir(carta):
     if extrai_naipe(carta) == '♠':
         carta = BLUE + carta + RESET
@@ -38,17 +40,14 @@ def colorir(carta):
     elif extrai_naipe(carta) == '♣':
         carta = GREEN + carta + RESET
     return carta
-'''
-teste = cria_baralho()
-carta1 = colorir(teste[1]) 
-print(carta1)'''
 
+# Mostra o estado das cartas no baralho
 def estado_baralho(baralho):
     print('O estado atual do baralho é:\n')
     for i in range(len(baralho)):
         print(str(i + 1) + '.  ' + colorir(baralho[i]))
 
-
+# Lista os movimentos possíveis
 def lista_movimentos_possiveis(baralho, posicao):
     movimentos = []
     carta = baralho[posicao]
@@ -66,6 +65,7 @@ def lista_movimentos_possiveis(baralho, posicao):
         valor_3 = extrai_valor(carta_3)
         if naipe == naipe_3 or valor == valor_3:
             movimentos.append(3)
+            
     elif posicao >= 1:
         carta_1 = baralho[posicao - 1]
         naipe_1 = extrai_naipe(carta_1)
@@ -74,11 +74,13 @@ def lista_movimentos_possiveis(baralho, posicao):
             movimentos.append(1)
     return movimentos
 
+# Movimento de empilhar cartas
 def empilha(baralho, origem, destino):
     baralho[destino] = baralho[origem]
     del baralho[origem]
     return baralho
 
+# Verifica se tem movimentos possíveis
 def possui_movimentos_possiveis(baralho):
     for i in range(len(baralho)):
         movimentos = lista_movimentos_possiveis(baralho, i)
