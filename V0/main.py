@@ -1,13 +1,22 @@
+# Importa o arquivo funcoes que lista as funções utilizadas nesse projeto
 from funcoes import *
+
+# Abre um arquivo txt que possui o texto que será apresentado para o usuário
 with open('V0/inicio.txt', encoding='utf-8') as f:
     data = f.read()
 print(data)
 
+# Pergunta se o usuário deseja iniciar
 continua = False
-while continua != True:
+finaliza = False
+while continua != True and finaliza == False:
     iniciar = input("Deseja iniciar? (Digite s ou n) ... ")
     if iniciar == 's':
         continua = True
+    elif iniciar == 'n':
+        finaliza = True
+        print("Até mais! :)")
+        
 
 # Pula uma linha
 print('\n')
