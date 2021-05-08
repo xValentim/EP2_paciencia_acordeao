@@ -12,12 +12,8 @@ REVERSE = "\033[;7m"
 # Funçao que cria baralho e embaralha as cartasS (shuffle)
 def cria_baralho():
     valores = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-    baralho = []
-    for i in range(13):
-        baralho.append(valores[i] + '♠')
-        baralho.append(valores[i] + '♥')
-        baralho.append(valores[i] + '♦')
-        baralho.append(valores[i] + '♣')
+    naipes = ['♠', '♥', '♦', '♣']
+    baralho = [valor + naipe for valor in valores for naipe in naipes]
     random.shuffle(baralho)
     return baralho
 

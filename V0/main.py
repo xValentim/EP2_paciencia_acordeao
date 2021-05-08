@@ -34,7 +34,7 @@ while continua:
         print('\n')
         try:
             indice_carta = int(input(f"Escolha uma carta (digite um número entre 1 e {len(baralho)}):  "))
-        except:
+        except ValueError:
             indice_carta = 0
         aux_i = indice_carta - 1
         escolhendo_carta = True
@@ -46,7 +46,7 @@ while continua:
                 while carta_valida != True:
                     try:
                         indice_carta = int(input(f"Posição inválida. Por favor, digite um número entre 1 e {len(baralho)}):"))
-                    except:
+                    except ValueError:
                         indice_carta = 0
                     if indice_carta > 0 and indice_carta <= len(baralho):
                         carta_valida = True
@@ -57,7 +57,7 @@ while continua:
             if len(movimentos) == 0:
                 try:
                     indice_carta = int(input(f'A carta {colorir(baralho[aux_i])} não pode ser movida. Por favor, digite um número entre 1 e {len(baralho)}):  '))
-                except:
+                except ValueError:
                     indice_carta = 0
                 aux_i = indice_carta - 1
             elif len(movimentos) == 1:
@@ -70,7 +70,7 @@ while continua:
                 try:
                     print(f"Sobre qual carta você quer empilhar o {colorir(baralho[aux_i])}? \n 1. {colorir(baralho[aux_i - 1])} \n 2. {colorir(baralho[aux_i - 3])} \n")
                     choice = int(input("Digite o número de sua escolha (1 ou 2): "))
-                except:
+                except ValueError:
                     choice = 0
                 # Pergunta ao usuário onde ele quer empilhar
                 escolhendo_onde_empilhar = True
@@ -91,7 +91,7 @@ while continua:
                         try:
                             print(f"Opção inválida. Sobre qual carta você quer empilhar o {colorir(baralho[aux_i])}? \n 1. {colorir(baralho[aux_i - 1])} \n 2. {colorir(baralho[aux_i - 3])} \n")
                             choice = int(input("Digite o número de sua escolha (1 ou 2): "))
-                        except:
+                        except ValueError:
                             choice = 0
 
     if len(baralho) > 1:
@@ -99,6 +99,10 @@ while continua:
     else:
         print('Você ganhou :) ')
     
-    resposta = input("Você quer jogar novamente (digite s ou n)? ")
+    resposta = None
+    while resposta not in ['s', 'n']:
+        resposta = input("Você quer jogar novamente (digite s ou n)? ")
+        
     if resposta == 'n':
+        print("Até mais! :) ")
         continua = False
