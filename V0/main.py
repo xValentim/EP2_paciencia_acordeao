@@ -24,7 +24,8 @@ print('\n')
 while continua:
 
     # Gera baralho
-    baralho = cria_baralho()
+    #baralho = cria_baralho()
+    baralho = ['A♠', '2♠', '3♥']
     while possui_movimentos_possiveis(baralho):
 
         # Mostra todo o baralho
